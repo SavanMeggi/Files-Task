@@ -26,13 +26,13 @@ data_file = data_file.loc[ (data_file['sub1_r'] != 'Absent') & (data_file['sub2_
 months_dict = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 'June': '06',
                'July': '07', 'August': '08', 'September': '09', 'October': '10', 'November': '11', 'December': '12'}
 
-clean_df['birth_month'] = clean_df['birth_month'].apply(lambda key: months_dict[key])
+data_file['birth_month'] = data_file['birth_month'].apply(lambda key: months_dict[key])
 
 #  concatenate birth_day, birth_month and birth_day to form new birthdate column
-clean_df['birth_date'] = clean_df['birth_day'].astype(str) + '-' + clean_df['birth_month'] + '-' + clean_df[
+data_file['birth_date'] = data_file['birth_day'].astype(str) + '-' + data_file['birth_month'] + '-' + data_file[
     'birth_year'].astype(str)
 
-clean_df['birth_date'] = pd.to_datetime(clean_df['birth_date'], format='%d-%m-%Y', errors='course')
+data_file['birth_date'] = pd.to_datetime(data_file['birth_date'], format='%d-%m-%Y', errors='course')
 
-clean_df = clean_df.drop(columns=['birth_day', 'birth_month', 'birth_year'])
+data_file = data_file.drop(columns=['birth_day', 'birth_month', 'birth_year'])
 # data_file.to_csv('modified.csv')
